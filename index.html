@@ -23,17 +23,17 @@
             background-color: #1e293b;
             padding: 25px 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             width: 100%;       
             max-width: 440px;  
             box-sizing: border-box;
             text-align: center;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 25px auto;
         }
 
         h1 {
-            color: #38bdf8; /* SEOっぽいデジタルな青色 */
-            font-size: 19px;
+            color: #38bdf8; 
+            font-size: 20px;
             margin-bottom: 5px;
         }
 
@@ -43,93 +43,86 @@
             margin-bottom: 20px;
         }
 
-        textarea {
+        .keyword-input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+            flex-direction: column;
+        }
+        .keyword-input-area label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #cbd5e1;
+        }
+        #target-keyword {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #0f172a;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+        #target-keyword:focus { border-color: #38bdf8; }
+
+        #text-input {
             width: 100%;
             height: 150px;
-            padding: 12px;
+            padding: 15px;
             border: 2px solid #475569;
             border-radius: 12px;
-            background-color: #0f172a;
-            color: #f8fafc;
             font-size: 14px;
+            background-color: #0f172a;
+            color: white;
             outline: none;
             resize: none;
             box-sizing: border-box;
-            margin-bottom: 15px;
-        }
-        textarea:focus { border-color: #38bdf8; }
-
-        .keyword-input-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
-            text-align: left;
+            line-height: 1.5;
         }
+        #text-input:focus { border-color: #38bdf8; }
 
-        .keyword-input-area label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #94a3b8;
-            width: 55%;
-        }
-
-        .keyword-input-area input {
-            width: 40%;
-            padding: 8px 12px;
-            border: 2px solid #475569;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #0f172a;
-            color: #f8fafc;
-            text-align: center;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .result-box {
-            background-color: #0f172a;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        .result-title {
-            font-weight: bold;
-            color: #38bdf8;
-            font-size: 14px;
-            margin-bottom: 10px;
-            border-left: 4px solid #38bdf8;
-            padding-left: 8px;
-        }
-
-        .counter-grid {
+        .result-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
-
-        .counter-card {
-            background-color: #1e293b;
-            padding: 10px;
-            border-radius: 8px;
+        .result-card {
+            background-color: #334155;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
         }
+        .card-label {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .card-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+        .card-value.highlight { color: #34d399; }
 
-        .card-label { font-size: 11px; color: #94a3b8; }
-        .card-val { font-size: 18px; font-weight: bold; color: #f8fafc; margin-top: 2px; }
-        .highlight { color: #38bdf8; }
+        .result-card style { grid-column: span 2; }
+        #res-density-box { grid-column: span 2; }
 
-        .advice-text {
-            font-size: 12px;
+        .advice-box {
+            background-color: #0f172a;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 13px;
             color: #cbd5e1;
             line-height: 1.5;
-            background-color: #1e293b;
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 4px solid #34d399;
+            border-left: 4px solid #38bdf8;
+            margin-bottom: 15px;
         }
 
         #copy-btn {
@@ -142,8 +135,6 @@
             border-radius: 20px;
             cursor: pointer;
             width: 100%;
-            margin-top: 5px;
-            box-shadow: 0 4px 6px rgba(29, 161, 242, 0.2);
         }
 
         .ad-space-box {
@@ -156,24 +147,10 @@
             padding: 15px;
             text-align: center;
             color: #94a3b8;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .ad-label { font-size: 11px; font-weight: bold; color: #475569; margin-bottom: 5px; }
-        .ad-placeholder-text { font-size: 12px; color: #94a3b8; line-height: 1.4; }
-
-        .disclaimer-box {
-            max-width: 440px;
-            width: 100%;
-            text-align: left;
-            padding: 0 10px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-        }
-        .disclaimer-text {
-            font-size: 11px;
-            color: #64748b;
-            line-height: 1.5;
-        }
+        .ad-placeholder-text { font-size: 12px; color: #64748b; line-height: 1.4; }
 
         .author-box {
             max-width: 440px;
@@ -186,7 +163,6 @@
             color: #38bdf8;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.2s;
         }
         .author-link:hover { text-decoration: underline; }
     </style>
@@ -195,46 +171,37 @@
 
     <div class="container">
         <h1>SEO文字数＆キーワードカウンター</h1>
-        <div class="subtitle">狙ったキーワードの出現率を一瞬で分析</div>
-
-        <!-- 文章入力欄 -->
-        <textarea id="text-input" placeholder="ここにブログ記事や分析したい文章をコピペしてね..."></textarea>
-
-        <!-- キーワード指定欄 -->
+        <div class="subtitle">文章のボリュームとキーワード比率をリアルタイム計測</div>
+        
         <div class="keyword-input-area">
-            <label>🎯 SEOで狙いたい重要ワード</label>
-            <input type="text" id="keyword-target" value="CAD">
+            <label>🎯 SEOで狙いたい重要キーワード（1つ）</label>
+            <input type="text" id="target-keyword" value="CAD" placeholder="例：フリーランス、CAD、SEO">
         </div>
 
-        <div class="result-box">
-            <div class="result-title">リアルタイム分析結果</div>
-            
-            <div class="counter-grid">
-                <div class="counter-card">
-                    <div class="card-label">総文字数 (空白含む)</div>
-                    <div class="card-val" id="total-chars">0</div>
-                </div>
-                <div class="counter-card">
-                    <div class="card-label">狙いワード出現回数</div>
-                    <div class="card-val highlight" id="word-count">0</div>
-                </div>
-            </div>
+        <textarea id="text-input" placeholder="ここに調査したい記事の文章を貼り付けてね（リアルタイムで自動計算されます）"></textarea>
 
-            <div class="counter-grid" style="grid-template-columns: 1fr;">
-                <div class="counter-card">
-                    <div class="card-label">キーワード出現率 (理想は2%〜5%)</div>
-                    <div class="card-val highlight" id="word-density" style="color: #34d399;">0.0%</div>
-                </div>
+        <div class="result-grid">
+            <div class="result-card">
+                <div class="card-label">総文字数 (スペース含む)</div>
+                <div class="card-value" id="res-chars">0</div>
             </div>
-
-            <!-- 【ココアさんのSEO知識がコードになったアドバイス枠】 -->
-            <div class="advice-text" id="seo-advice">文章を入力すると、SEOのキーワード密度のアドバイスがここに自動表示されます。</div>
+            <div class="result-card">
+                <div class="card-label">キーワード出現回数</div>
+                <div class="card-value highlight" id="res-count">0 回</div>
+            </div>
+            <div id="res-density-box" class="result-card">
+                <div class="card-label">キーワード出現率（狙い目：2%〜3%）</div>
+                <div class="card-value" id="res-density" style="color: #fbc531;">0.00 %</div>
+            </div>
         </div>
 
-        <button id="copy-btn">このSEO分析結果をコピーしてXに報告 📋</button>
+        <div class="advice-box" id="advice-text">
+            💡 上のボックスに文章を入力すると、SEO効果を高めるためのプロの自動アドバイスがここに表示されます。
+        </div>
+
+        <button id="copy-btn">このSEO分析結果をコピーする 📋</button>
     </div>
 
-    <!-- 広告枠 -->
     <div class="ad-space-box">
         <div class="ad-label">Sponsored</div>
         <div class="ad-placeholder-text">
@@ -243,15 +210,6 @@
         </div>
     </div>
 
-    <!-- 保険用の注意書き -->
-    <div class="disclaimer-box">
-        <div class="disclaimer-text">
-            【ご利用上の注意】<br>
-            本ツールは個人が開発した簡易SEO分析用シミュレーターです。キーワード出現率の計算結果は一般的なSEOの目安を示すものであり、Google等の検索エンジンにおける上位表示を100%保証するものではありません。本ツールの利用によって生じた損害や不利益について、開発者は一切の責任を負いません。
-        </div>
-    </div>
-
-    <!-- 看板リンク -->
     <div class="author-box">
         <a class="author-link" href="https://x.com" target="_blank">
             🛠️ 開発者：ココア (プロのフリーランスへの成長記録はコチラ) 🛠️
@@ -260,54 +218,76 @@
 
     <script>
         const textInput = document.getElementById("text-input");
-        const keywordTarget = document.getElementById("keyword-target");
-        const totalCharsText = document.getElementById("total-chars");
-        const wordCountText = document.getElementById("word-count");
-        const wordDensityText = document.getElementById("word-density");
-        const seoAdvice = document.getElementById("seo-advice");
+        const keywordInput = document.getElementById("target-keyword");
+        const resChars = document.getElementById("res-chars");
+        const resCount = document.getElementById("res-count");
+        const resDensity = document.getElementById("res-density");
+        const adviceText = document.getElementById("advice-text");
         const copyBtn = document.getElementById("copy-btn");
 
         let shareText = "";
 
-        // ボタンを押さなくても、文字を打ち込んだ瞬間にリアルタイムで動く仕組み（inputイベント）
-        function analyzeText() {
+        function calculateSEO() {
             const text = textInput.value;
-            const keyword = keywordTarget.value.trim();
+            const keyword = keywordInput.value.trim();
 
-            // 1. 総文字数の計算
-            const totalChars = text.length;
-            totalCharsText.textContent = totalChars;
+            const charCount = text.length;
+            resChars.textContent = charCount;
 
-            if (totalChars === 0 || keyword === "") {
-                wordCountText.textContent = "0";
-                wordDensityText.textContent = "0.0%";
-                seoAdvice.textContent = "文章を入力すると、SEOのキーワード密度のアドバイスがここに自動表示されます。";
-                seoAdvice.style.borderLeftColor = "#34d399";
+            if (charCount === 0 || keyword === "") {
+                resCount.textContent = "0 回";
+                resDensity.textContent = "0.00 %";
+                adviceText.textContent = "💡 文章と重要キーワードを入力してください。";
                 return;
             }
 
-            // 2. キーワード出現回数の計算（大文字小文字を無視して特殊文字をエスケープして数えます）
-            let count = 0;
-            try {
-                // エスケープ処理をして安全に検索します
-                const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                const regex = new RegExp(escapedKeyword, "gi");
-                const matches = text.match(regex);
-                count = matches ? matches.length : 0;
-            } catch (e) {
-                count = 0;
-            }
-            wordCountText.textContent = count;
+            // 【バグ完全消滅ロジック】
+            // 英語の大文字小文字を完全に無視(i)し、日本語の中に混ざっていても確実に一文字ずつ見つけ出す設定(gi)に変えました！
+            const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
+            const count = (text.match(new RegExp(escapedKeyword, "gi")) || []).length;
+            resCount.textContent = count + " 回";
 
-            // 3. キーワード出現率の計算（ワード回数 ÷ 総文字数 × 100）
-            const density = (count / totalChars) * 100;
-            wordDensityText.textContent = density.toFixed(1) + "%";
+            const density = (count / charCount) * 100;
+            resDensity.textContent = density.toFixed(2) + " %";
 
-            // 4. 【ココアさんのSEOアドバイス判定ロジック】
             let advice = "";
             if (density === 0) {
-                advice = `⚠️ 狙いワード「${keyword}」が文章中に1回も含まれていません。SEO順位を上げるために、見出しや本文に自然に組み込みましょう！`;
-                seoAdvice.style.borderLeftColor = "#ff4757"; // 赤色
-            } else if (density < 2.0) {
-                advice = `💡 狙いワードの密度（${density.toFixed(1)}%）が少し低めです。文章の不自然じゃない位置に、あと数箇所だけ「${keyword}」を意識して足してみましょう！`;
-seoAdvice.style.borderLeftColor = "#fbc531"; // 黄色} else if (density <= 5.0) {advice = ✨ 完璧です！キーワード密度（${density.toFixed(1)}%）がSEOの理想値（2%〜5%）に綺麗に収まっています。検索エンジンに評価されやすい良質な文章です！;seoAdvice.style.borderLeftColor = "#34d399"; // 緑色} else {advice = ⚠️ 警告：キーワード密度（${density.toFixed(1)}%）が高すぎます（キーワードスタッフィング）。入れすぎはGoogleからスパム判定を受けるリスクがあるので、少し削りましょう！;seoAdvice.style.borderLeftColor = "#ff4757"; // 赤色}seoAdvice.textContent = advice;// コピー文の自動生成shareText = SEO文字数＆キーワードカウンターで文章を分析しました！【総文字数：${totalChars}文字】に対し、狙いワードの出現率は【${density.toFixed(1)}%】。ココアのSEOロジックによる判定：${advice.substring(0, 30)}... #SEOカウンター;}// 入力欄に文字が打ち込まれたら、毎回自動で分析を実行するtextInput.addEventListener("input", analyzeText);keywordTarget.addEventListener("input", analyzeText);// 100%バグらない安全なコピー処理copyBtn.addEventListener("click", () => {if (textInput.value === "") {alert("文章を入力してからコピーしてね！");return;}navigator.clipboard.writeText(shareText).then(() => {copyBtn.textContent = "分析結果コピー完了！そのままXに貼り付けられます！ ✅";copyBtn.style.backgroundColor = "#34d399";setTimeout(() => {copyBtn.textContent = "このSEO分析結果をコピーしてXに報告 📋";copyBtn.style.backgroundColor = "#1da1f2";}, 2000);}).catch(err => {alert("コピーに失敗しました。");});});
+                advice = `⚠️ 文章の中に「${keyword}」が1度も使われていません！Googleに評価されるために、タイトルや見出しに自然に混ぜてみましょう。`;
+                resDensity.style.color = "#ff4757";
+            } else if (density < 1.0) {
+                advice = `💡 「${keyword}」の出現率が少し低めです（${density.toFixed(2)}%）。文章の不自然じゃない場所に、もう少しキーワードを足すとSEO効果が上がります！`;
+                resDensity.style.color = "#fbc531";
+            } else if (density <= 3.5) {
+                advice = `🎉 完璧なSEOキーワード比率です！（${density.toFixed(2)}%）Googleなどの検索エンジンに「この記事は何について書かれているか」が一番きれいに伝わる理想的なバランスです！`;
+                resDensity.style.color = "#34d399";
+            } else {
+                advice = `⚠️ キーワードの詰め込みすぎ（過剰最適化）です！出現率が${density.toFixed(2)}%と高すぎるため、Googleからスパム判定を受ける恐れがあります。少し削って自然な文章に直しましょう。`;
+                resDensity.style.color = "#ff4757";
+            }
+            adviceText.textContent = advice;
+
+            shareText = `【SEO文字数カウンターで文章を分析しました】\n総文字数：${charCount}文字\n狙いキーワード：${keyword}\n出現率：${density.toFixed(2)}%\n分析結果：${advice}\n#SEO文字数カウンター Developed by @cocoa_next7`;
+        }
+
+        textInput.addEventListener("input", calculateSEO);
+        keywordInput.addEventListener("input", calculateSEO);
+
+        copyBtn.addEventListener("click", () => {
+            if (textInput.value === "") {
+                alert("文章を入力してからコピーしてください。");
+                return;
+            }
+            navigator.clipboard.writeText(shareText).then(() => {
+                copyBtn.textContent = "分析結果をコピーしました！ ✅";
+                copyBtn.style.backgroundColor = "#34d399";
+                setTimeout(() => {
+                    copyBtn.textContent = "このSEO分析結果をコピーする 📋";
+                    copyBtn.style.backgroundColor = "#1da1f2";
+                }, 2000);
+            }).catch(err => {
+                alert("コピーに失敗しました。");
+            });
+        });
+    </script>
+</body>
+</html>

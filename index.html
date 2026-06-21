@@ -5,195 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEO文字数＆キーワード一瞬カウンター 2.0</title>
     <style>
-        /* ココアさん標準仕様：PCは真ん中寄せ・スマホは100%フィット */
-        body {
-            background-color: #2c3e50;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 15px;
-            box-sizing: border-box;
-        }
+    /* ココアさん仕様：PCは真ん中寄せ・集中できる黒モードデザイン */
+    body {
+        background-color: #1a1a1a;
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+        color: #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 15px;
+        box-sizing: border-box;
+    }
 
-        .container {
-            background-color: white;
-            padding: 25px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            width: 100%;       
-            max-width: 480px;  
-            box-sizing: border-box;
-            text-align: center;
-            margin: 0 auto 20px auto;
-        }
+    .container {
+        background-color: #262626;
+        padding: 25px 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        width: 100%;       
+        max-width: 440px;  
+        box-sizing: border-box;
+        text-align: center;
+        margin: 0 auto 20px auto;
+        border: 1px solid #333;
+    }
 
-        h1 {
-            color: #27ae60; 
-            font-size: 19px;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #27ae60;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
+    h1 {
+        color: #2980b9; 
+        font-size: 19px;
+        margin-top: 0;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #2980b9;
+        padding-bottom: 10px;
+    }
 
-        h2 {
-            font-size: 14px;
-            color: #2c3e50;
-            text-align: left;
-            border-left: 4px solid #27ae60;
-            padding-left: 8px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
+    label {
+        font-weight: bold;
+        font-size: 13px;
+        color: #b3b3b3;
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+    }
 
-        .input-block {
-            text-align: left;
-            margin-bottom: 15px;
-        }
+    /* 入力エリアも黒背景に統一してプロ仕様に */
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        background-color: #1a1a1a;
+        border: 2px solid #444;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+    input[type="text"]:focus, textarea:focus {
+        border-color: #2980b9;
+        background-color: #1f1f1f;
+    }
 
-        .input-block label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+    #calc-btn, #copy-btn {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        width: 100%;
+        margin: 10px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: background 0.2s;
+    }
+    #calc-btn:hover { background-color: #3498db; }
+    
+    #copy-btn { background-color: #1da1f2; margin-top: 15px; }
+    #copy-btn:hover { background-color: #4ab3f4; }
 
-        .input-block input, .input-block textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            box-sizing: border-box;
-            margin-top: 5px;
-        }
+    .result-box {
+        background-color: #1a1a1a;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+        text-align: left;
+        border: 1px solid #333;
+    }
 
-        .input-block textarea {
-            height: 120px;
-            resize: vertical;
-        }
+    .result-title {
+        font-weight: bold;
+        color: #fff;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
 
-        /* 視覚警告メーターバー */
-        .meter-container {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 5px;
-            overflow: hidden;
-        }
+    /* 警告バーのベース（グレー部分） */
+    .bar-container {
+        width: 100%;
+        height: 8px;
+        background: #333;
+        border-radius: 4px;
+        margin-top: 4px;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
 
-        .meter-bar {
-            width: 0%;
-            height: 100%;
-            background: #2ecc71;
-            transition: width 0.2s, background-color 0.2s;
-        }
+    .counter-info {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: -10px;
+        margin-bottom: 5px;
+        text-align: left;
+    }
 
-        .result-box {
-            background-color: #ecf0f1;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 20px;
-            text-align: left;
-        }
+    .ad-space-box {
+        width: 100%;
+        max-width: 440px;
+        box-sizing: border-box;
+        background-color: #262626;
+        border: 2px dashed #444;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        color: #888;
+        margin-bottom: 20px;
+    }
+    .ad-label { font-size: 11px; font-weight: bold; color: #666; margin-bottom: 5px; }
+    .ad-placeholder-text { font-size: 12px; color: #888; line-height: 1.4; }
 
-        .result-title {
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 15px;
-            margin-bottom: 10px;
-            border-left: 4px solid #27ae60;
-            padding-left: 8px;
-        }
+    .disclaimer-box {
+        max-width: 440px;
+        width: 100%;
+        text-align: left;
+        padding: 0 10px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+    .disclaimer-text {
+        font-size: 11px;
+        color: #666;
+        line-height: 1.5;
+    }
 
-        .result-value {
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #333;
-        }
+    .author-box {
+        max-width: 440px;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .author-link {
+        font-size: 12px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .author-link:hover { text-decoration: underline; }
+</style>
 
-        .highlight {
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        #seo-advice {
-            margin-top: 10px;
-            padding: 10px;
-            background: #fff;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: bold;
-            line-height: 1.4;
-            border-left: 4px solid #333;
-        }
-
-        #copy-btn {
-            background-color: #1da1f2;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 20px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 4px 6px rgba(29, 161, 242, 0.2);
-        }
-        #copy-btn:hover { background-color: #4ab3f4; }
-
-        /* 不労所得用：アドセンス広告枠スペース */
-        .ad-space-box {
-            width: 100%;
-            max-width: 480px;
-            box-sizing: border-box;
-            background-color: #34495e;
-            border: 2px dashed #bdc3c7;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            color: #bdc3c7;
-            margin-bottom: 20px;
-        }
-        .ad-label { font-size: 11px; font-weight: bold; color: #bdc3c7; margin-bottom: 5px; }
-        .ad-placeholder-text { font-size: 12px; color: #bdc3c7; line-height: 1.4; }
-
-        .disclaimer-box {
-            max-width: 480px;
-            width: 100%;
-            text-align: left;
-            padding: 0 10px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-        }
-        .disclaimer-text {
-            font-size: 11px;
-            color: #bdc3c7;
-            line-height: 1.5;
-        }
-
-        .author-box {
-            max-width: 480px;
-            width: 100%;
-            text-align: center;
-            margin: 0 auto;
-        }
-        .author-link {
-            font-size: 12px;
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .author-link:hover { text-decoration: underline; }
-    </style>
 </head>
 <body>
 

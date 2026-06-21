@@ -177,6 +177,27 @@
             <label>🎯 SEOで狙いたい重要キーワード（1つ）</label>
             <input type="text" id="target-keyword" value="CAD" placeholder="例：フリーランス、CAD、SEO">
         </div>
+<!-- ーーー ここから新機能のHTMLパーツ ーーー -->
+<div style="text-align: left; margin-bottom: 20px;">
+    <label style="font-weight: bold; font-size: 13px; color: #2c3e50;">■ 記事タイトル（目標32文字以内）</label>
+    <input type="text" id="title-input" placeholder="タイトルを入力" style="width: 100%; padding: 10px; margin-top: 5px; border: 2px solid #bdc3c7; border-radius: 8px; box-sizing: border-box;">
+    <div style="font-size: 12px; margin-top: 5px; color: #7f8c8d;">文字数: <span id="title-count" style="font-weight: bold;">0</span> / 32 文字</div>
+    <!-- 視覚警告バー -->
+    <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+        <div id="title-bar" style="width: 0%; height: 100%; background: #2ecc71; transition: width 0.2s, background-color 0.2s;"></div>
+    </div>
+</div>
+
+<div style="text-align: left; margin-bottom: 20px;">
+    <label style="font-weight: bold; font-size: 13px; color: #2c3e50;">■ メタディスクリプション（目標120文字以内）</label>
+    <input type="text" id="desc-input" placeholder="ディスクリプションを入力" style="width: 100%; padding: 10px; margin-top: 5px; border: 2px solid #bdc3c7; border-radius: 8px; box-sizing: border-box;">
+    <div style="font-size: 12px; margin-top: 5px; color: #7f8c8d;">文字数: <span id="desc-count" style="font-weight: bold;">0</span> / 120 文字</div>
+    <!-- 視覚警告バー -->
+    <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+        <div id="desc-bar" style="width: 0%; height: 100%; background: #2ecc71; transition: width 0.2s, background-color 0.2s;"></div>
+    </div>
+</div>
+<!-- ーーー ここまで新機能のHTMLパーツ ーーー -->
 
         <textarea id="text-input" placeholder="ここに調査したい記事の文章を貼り付けてね（リアルタイムで自動計算されます）"></textarea>
 

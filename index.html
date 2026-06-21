@@ -216,78 +216,98 @@
         </a>
     </div>
 
-    <script>
-        const textInput = document.getElementById("text-input");
-        const keywordInput = document.getElementById("target-keyword");
-        const resChars = document.getElementById("res-chars");
-        const resCount = document.getElementById("res-count");
-        const resDensity = document.getElementById("res-density");
-        const adviceText = document.getElementById("advice-text");
-        const copyBtn = document.getElementById("copy-btn");
+   <script>
+    // 既存のパーツ
+    const textarea = document.getElementById("target-text");
+    const keywordInput = document.getElementById("keyword-input");
+    const charCountSpan = document.getElementById("char-count");
+    const keywordCountSpan = document.getElementById("keyword-count");
+    const keywordPercentSpan = document.getElementById("keyword-percent");
+    const seoAdviceDiv = document.getElementById("seo-advice");
+    const copyBtn = document.getElementById("copy-btn");
 
-        let shareText = "";
+    // 【新機能】タイトル・ディスクリプション用のパーツ
+    const titleInput = document.getElementById("title-input") || { value: "" };
+    const descInput = document.getElementById("desc-input") || { value: "" };
+    const titleCount = document.getElementById("title-count");
+    const descCount = document.getElementById("desc-count");
+    const titleBar = document.getElementById("title-bar");
+    const descBar = document.getElementById("desc-bar");
 
-        function calculateSEO() {
-            const text = textInput.value;
-            const keyword = keywordInput.value.trim();
+    let shareText = "";
 
-            const charCount = text.length;
-            resChars.textContent = charCount;
+    function analyzeText() {
+        const text = textarea.value;
+        const keyword = keywordInput.value.trim();
+        const titleText = titleInput.value;
+        const descText = descInput.value;
+        
+        // 1. 本文文字数の反映
+        charCountSpan.innerText = text.length;
 
-            if (charCount === 0 || keyword === "") {
-                resCount.textContent = "0 回";
-                resDensity.textContent = "0.00 %";
-                adviceText.textContent = "💡 文章と重要キーワードを入力してください。";
-                return;
-            }
-
-            // 【バグ完全消滅ロジック】
-            // 英語の大文字小文字を完全に無視(i)し、日本語の中に混ざっていても確実に一文字ずつ見つけ出す設定(gi)に変えました！
-            const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
-            const count = (text.match(new RegExp(escapedKeyword, "gi")) || []).length;
-            resCount.textContent = count + " 回";
-
-            const density = (count / charCount) * 100;
-            resDensity.textContent = density.toFixed(2) + " %";
-
-            let advice = "";
-            if (density === 0) {
-                advice = `⚠️ 文章の中に「${keyword}」が1度も使われていません！Googleに評価されるために、タイトルや見出しに自然に混ぜてみましょう。`;
-                resDensity.style.color = "#ff4757";
-            } else if (density < 1.0) {
-                advice = `💡 「${keyword}」の出現率が少し低めです（${density.toFixed(2)}%）。文章の不自然じゃない場所に、もう少しキーワードを足すとSEO効果が上がります！`;
-                resDensity.style.color = "#fbc531";
-            } else if (density <= 3.5) {
-                advice = `🎉 完璧なSEOキーワード比率です！（${density.toFixed(2)}%）Googleなどの検索エンジンに「この記事は何について書かれているか」が一番きれいに伝わる理想的なバランスです！`;
-                resDensity.style.color = "#34d399";
-            } else {
-                advice = `⚠️ キーワードの詰め込みすぎ（過剰最適化）です！出現率が${density.toFixed(2)}%と高すぎるため、Googleからスパム判定を受ける恐れがあります。少し削って自然な文章に直しましょう。`;
-                resDensity.style.color = "#ff4757";
-            }
-            adviceText.textContent = advice;
-
-            shareText = `【SEO文字数カウンターで文章を分析しました】\n総文字数：${charCount}文字\n狙いキーワード：${keyword}\n出現率：${density.toFixed(2)}%\n分析結果：${advice}\n#SEO文字数カウンター Developed by @cocoa_next7`;
+        // 2. 【新機能】タイトル・ディスクリプションの文字数＆バー監視
+        if (titleCount) titleCount.innerText = titleText.length;
+        if (descCount) descCount.innerText = descText.length;
+        
+        if (titleBar) {
+            titleBar.style.width = Math.min((titleText.length / 32) * 100, 100) + "%";
+            titleBar.style.backgroundColor = titleText.length > 32 ? "#e74c3c" : "#2ecc71";
+        }
+        if (descBar) {
+            descBar.style.width = Math.min((descText.length / 120) * 100, 100) + "%";
+            descBar.style.backgroundColor = descText.length > 120 ? "#e74c3c" : "#2ecc71";
         }
 
-        textInput.addEventListener("input", calculateSEO);
-        keywordInput.addEventListener("input", calculateSEO);
+        if (!keyword) {
+            keywordCountSpan.innerText = "0";
+            keywordPercentSpan.innerText = "0.0";
+            seoAdviceDiv.innerHTML = "💡 狙いたいSEOキーワードを入力してください。";
+            seoAdviceDiv.style.color = "#333";
+            return;
+        }
 
-        copyBtn.addEventListener("click", () => {
-            if (textInput.value === "") {
-                alert("文章を入力してからコピーしてください。");
-                return;
-            }
-            navigator.clipboard.writeText(shareText).then(() => {
-                copyBtn.textContent = "分析結果をコピーしました！ ✅";
-                copyBtn.style.backgroundColor = "#34d399";
-                setTimeout(() => {
-                    copyBtn.textContent = "このSEO分析結果をコピーする 📋";
-                    copyBtn.style.backgroundColor = "#1da1f2";
-                }, 2000);
-            }).catch(err => {
-                alert("コピーに失敗しました。");
-            });
-        });
-    </script>
+        // 3. キーワード出現数のカウント（giロジック）
+        const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(escapedKeyword, "gi");
+        const matches = text.match(regex);
+        const count = matches ? matches.length : 0;
+        keywordCountSpan.innerText = count;
+
+        // 4. 出現比率（％）の計算
+        const percent = text.length > 0 ? ((count * keyword.length) / text.length) * 100 : 0;
+        keywordPercentSpan.innerText = percent.toFixed(1);
+
+        // 5. アドバイス切り替え
+        if (count === 0) {
+            seoAdviceDiv.innerHTML = "⚠️ キーワードが記事内に含まれていません！";
+            seoAdviceDiv.style.color = "#e74c3c";
+        } else if (percent < 2.0) {
+            seoAdviceDiv.innerHTML = "📉 キーワード比率が低め（2%未満）です。見出し等に追加しましょう。";
+            seoAdviceDiv.style.color = "#e67e22";
+        } else if (percent >= 2.0 && percent <= 3.5) {
+            seoAdviceDiv.innerHTML = "🎯 【黄金比率】キーワード比率が2%〜3.5%の適正範囲です！";
+            seoAdviceDiv.style.color = "#2ecc71";
+        } else {
+            seoAdviceDiv.innerHTML = "🚨 【入れすぎ注意】比率が過剰（3.5%超）です！ペナルティリスクがあります。";
+            seoAdviceDiv.style.color = "#e74c3c";
+        }
+
+        shareText = `【SEO一瞬カウンター分析】\n本文: ${text.length}文字\nキーワード: 「${keyword}」\n出現: ${count}回 (${percent.toFixed(1)}%)\nURLアプデ後も一生同じ！`;
+    }
+
+    // すべての入力をリアルタイム監視
+    textarea.addEventListener("input", analyzeText);
+    keywordInput.addEventListener("input", analyzeText);
+    if (titleInput.addEventListener) titleInput.addEventListener("input", analyzeText);
+    if (descInput.addEventListener) descInput.addEventListener("input", analyzeText);
+
+    copyBtn.addEventListener("click", () => {
+        if (!textarea.value) { alert("⚠️ 文章を入力してください！"); return; }
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert("📋 X報告用の文章をコピーしました！");
+        }).catch(() => { alert("⚠️ コピーに失敗しました。"); });
+    });
+</script>
+
 </body>
 </html>
